@@ -1,11 +1,11 @@
 package edu.iu.c322.group10.orderservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+
+import java.util.List;
 import java.util.Objects;
+
 
 @Entity
 public class Order {
@@ -13,6 +13,11 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderId;
+
+
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    private List<Item> items;
+
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;

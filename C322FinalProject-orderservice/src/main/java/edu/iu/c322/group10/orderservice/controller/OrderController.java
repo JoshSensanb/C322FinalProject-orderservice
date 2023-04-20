@@ -30,14 +30,14 @@ public class OrderController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public void update(@Valid @RequestBody Order order, @PathVariable int id){
         order.setOrderId(id);
         orderRepository.save(order);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable int id){
         Order order = new Order();
         order.setOrderId(id);
