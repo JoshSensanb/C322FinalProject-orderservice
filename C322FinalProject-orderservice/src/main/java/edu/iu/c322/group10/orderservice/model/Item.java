@@ -1,11 +1,9 @@
 package edu.iu.c322.group10.orderservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +18,9 @@ public class Item {
 
     private float price;
 
+    @OneToMany(mappedBy = "item",cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
     public int getItemId(){
         return itemId;
     }
@@ -32,6 +33,10 @@ public class Item {
         return price;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
     public void setItemId(int itemId) {
         this.itemId = itemId;
     }
@@ -42,6 +47,10 @@ public class Item {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override
