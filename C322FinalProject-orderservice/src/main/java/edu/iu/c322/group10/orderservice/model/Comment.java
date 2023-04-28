@@ -16,6 +16,14 @@ public class Comment {
     private String customerName;
     private String body;
 
+    public int getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
+    }
+
     public int getItemId() {
         return itemId;
     }
