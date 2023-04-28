@@ -15,6 +15,8 @@ public class Order {
     private int orderId;
 
 
+    private String orderStatus;
+
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<Item> items;
 
@@ -34,6 +36,13 @@ public class Order {
         return (getOrderId() == order.getOrderId());
     }
 
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
     @Override
     public int hashCode() {
