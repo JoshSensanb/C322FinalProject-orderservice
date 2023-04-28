@@ -14,10 +14,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderId;
 
+    private int customerId;
 
     private String orderStatus;
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "itemId",cascade = CascadeType.ALL)
     private List<Item> items;
 
 
@@ -27,6 +28,22 @@ public class Order {
 
     public int getOrderId() {
         return orderId;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     @Override

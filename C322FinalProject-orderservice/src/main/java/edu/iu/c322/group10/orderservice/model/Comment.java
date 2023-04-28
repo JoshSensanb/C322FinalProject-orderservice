@@ -10,6 +10,8 @@ public class Comment {
     
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+    private int commentId;
+
     private int itemId;
     private String customerName;
     private String body;

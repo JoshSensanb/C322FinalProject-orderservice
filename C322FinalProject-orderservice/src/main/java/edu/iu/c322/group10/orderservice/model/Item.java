@@ -18,8 +18,10 @@ public class Item {
 
     private float price;
 
-    @OneToMany(mappedBy = "item",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "itemId",cascade = CascadeType.ALL)
     private List<Comment> comments;
+
+    public Item(){}
 
     public int getItemId(){
         return itemId;
