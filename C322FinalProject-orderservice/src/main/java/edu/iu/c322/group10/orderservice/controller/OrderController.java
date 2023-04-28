@@ -1,6 +1,8 @@
 package edu.iu.c322.group10.orderservice.controller;
 
+import edu.iu.c322.group10.orderservice.model.Item;
 import edu.iu.c322.group10.orderservice.model.Order;
+import edu.iu.c322.group10.orderservice.repository.ItemRepository;
 import edu.iu.c322.group10.orderservice.repository.OrderRepository;
 import jakarta.validation.Valid;
 import org.aspectj.weaver.ast.Or;
@@ -14,6 +16,7 @@ import java.util.Optional;
 @RequestMapping("/orders")
 public class OrderController {
     private OrderRepository orderRepository;
+    private ItemRepository itemRepository;
 
     public OrderController(OrderRepository orderRepository){
         this.orderRepository = orderRepository;
@@ -28,6 +31,12 @@ public class OrderController {
     @PostMapping
     public int create(Order order){
         Order newOrder = orderRepository.save(order);
+        ItemRepository itemRepository;
+        ItemController itemController = new ItemController(this.itemRepository);
+        List<Item> items = order.getItems();
+        for(int i =0;i<items.size();i++){
+            itemController.create(items.get(i));
+        }
         return newOrder.getOrderId();
     }
 

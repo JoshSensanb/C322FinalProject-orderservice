@@ -21,7 +21,7 @@ public class Item {
     @OneToMany(mappedBy = "itemId",cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    public Item(){}
+
 
     public int getItemId(){
         return itemId;
