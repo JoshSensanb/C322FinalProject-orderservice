@@ -23,7 +23,7 @@ public class OrderController {
 
     public OrderController(OrderRepository orderRepository, WebClient.Builder webClientBuilder){
         this.orderRepository = orderRepository;
-        this.itemService = webClientBuilder.baseUrl("").build();
+        this.itemService = webClientBuilder.baseUrl("localhost:8080/items").build();
     }
 
     @GetMapping
