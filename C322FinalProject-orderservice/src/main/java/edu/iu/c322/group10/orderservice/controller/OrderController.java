@@ -47,6 +47,13 @@ public class OrderController {
         orderRepository.save(oldOrder);
         return oldOrder.getOrderId();
     }
+    @GetMapping("/get/{id}")
+    public Order getOrder(@PathVariable int id){
+        Optional<Order> optionalOrder =orderRepository.findById(id);
+        Order order = optionalOrder.get();
+        return order;
+
+    }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/update/{id}")
