@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +19,11 @@ public class OrderController {
     private OrderRepository orderRepository;
     private ItemRepository itemRepository;
 
-    public OrderController(OrderRepository orderRepository){
+    private WebClient itemService;
+
+    public OrderController(OrderRepository orderRepository, WebClient.Builder webClientBuilder){
         this.orderRepository = orderRepository;
+        this.itemService = webClientBuilder.baseUrl("").build();
     }
 
     @GetMapping
@@ -33,9 +37,13 @@ public class OrderController {
         Order newOrder = orderRepository.save(order);
         ItemRepository itemRepository;
         ItemController itemController = new ItemController(this.itemRepository);
-        List<Item> items = order.getItems();
+
+        List<Item> items = newOrder.getItems();
+
         for(int i =0;i<items.size();i++){
-            itemController.create(items.get(i));
+            //itemController.create(items.get(i));
+            itemService.post().uri("/items", items.get(i))
+                    .retrieve().bodyToMono(Item.class).block();
         }
         return newOrder.getOrderId();
     }
