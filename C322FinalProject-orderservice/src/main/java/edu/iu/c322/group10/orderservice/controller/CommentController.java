@@ -22,7 +22,7 @@ public class CommentController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public int create(Comment comment){
+    public int create(@RequestBody Comment comment){
         Comment newComment = commentRepository.save(comment);
         return newComment.getCommentId();
     }

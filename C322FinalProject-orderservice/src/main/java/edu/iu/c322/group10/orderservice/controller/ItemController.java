@@ -25,7 +25,7 @@ public class ItemController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public int create(Item item){
+    public int create(@RequestBody Item item){
         Item newItem = repository.save(item);
         return newItem.getItemId();
     }
